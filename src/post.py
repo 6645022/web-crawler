@@ -25,6 +25,6 @@ class Post:
         post = dict()
         post['author'] = self.author
         post['title'] = self.title
-        post['content'] = self.content
+        # post['content'] = self.content //
         post['date'] = self.date
         return post

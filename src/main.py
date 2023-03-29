@@ -17,7 +17,9 @@ def post_crawler(url, path):
     content = requests.get(url + '/row' + path).content
     post = Post(author, title, content, date).get_post()
     print(f'Finish task {url + path}...')
-    return post
+    print(post)
+    return
+
 
 def main(url):
     try:
@@ -28,19 +30,18 @@ def main(url):
         tree_nodes = tree.find('body/div/div[2]/div/div/div[3]/table/tbody/tr')
         nodes = tree_nodes.xpath('//td[1]/a/@href')
         nodes_published_time = tree_nodes.xpath('//td/text()')
-
-        print(f'{len(nodes)} posts')
+        print(f'page contain {len(nodes)} posts')
 
         threads = []
-        for published_time, node in zip(nodes_published_time, nodes):
+        for published_time, path in zip(nodes_published_time, nodes):
             if check_post_published_time(published_time):
-                t = Thread(target=post_crawler, args=(url, node,))
+                print(f'New post to scrape - {url + path}')
+                t = Thread(target=post_crawler, args=(url, path,))
                 threads.append(t)
                 t.start()
 
         for t in threads:
             t.join()
-
         return
 
     except requests.exceptions.HTTPError as err:
