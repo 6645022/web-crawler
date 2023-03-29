@@ -31,9 +31,6 @@ def main(url):
 
         print(f'{len(nodes)} posts')
 
-        # nodes_published_time = ['2 sec ago', '10 min ago']
-        # nodes = ['/ZBeELhjM', '/ZBeELhjM23']
-
         threads = []
         for published_time, node in zip(nodes_published_time, nodes):
             if check_post_published_time(published_time):
@@ -44,7 +41,6 @@ def main(url):
         for t in threads:
             t.join()
 
-        print(t)
         return
 
     except requests.exceptions.HTTPError as err:
