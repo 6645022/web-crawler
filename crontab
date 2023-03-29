@@ -1,0 +1,1 @@
+*/2 * * * * python /crawler/src/main.py >> /tmp/out.log 2>&1

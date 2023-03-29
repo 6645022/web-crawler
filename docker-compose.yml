@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  crawler3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - URL=https://pastebin.com
+      - published_time_threshold=120
+
