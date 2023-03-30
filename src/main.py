@@ -16,8 +16,8 @@ def post_crawler(url, path):
     date = data.xpath(tree_path + 'div[2]/div[2]/span[1]/@title')[0]
     content = requests.get(url + '/row' + path).content
     post = Post(author, title, content, date).get_post()
-    print(f'Finish task {url + path}...')
     print(post)
+    print(f'Finish task {url + path}...')
     return
 
 
